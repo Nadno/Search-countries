@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Countries Search</title>
+</head>
+<body>
+  <header class="header">
+    <strong>Where in the world?</strong>
+    <div class="header__dark__mode">
+      Dark Mode
+    </div>
+  </header>
+
+  <section class="search__country">
+    <form class="search__country__form" id="search">
+      <div class="search__input__block">
+        <button class="search__submit" type="submit">
+          Buscar
+        </button>
+        <input
+          class="search__input"
+          id="country"
+          type="text"
+          name="country"
+          list="founded__countries"
+          placeholder="Search for a country">
+        <datalist id="founded__countries">
+         
+        </datalist>
+      </div>
+      <select class="search__select__region" id="region" name="region">
+        <option value="" selected>Filter by</option>
+        <option value="Africa">Africa</option>
+        <option value="America">America</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </form>
+  </section>
+
+  <section class="result">
+
+  </section>
+
+  <script src="/index.js"></script>
+</body>
+</html>
