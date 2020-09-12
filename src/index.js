@@ -1,5 +1,5 @@
 import { getCountries, getCountriesNames, getRegion } from "./api.js";
-import { countryPreview } from "./countryElement.js";
+import countryPreview from "./preview.js";
 
 const search = document.getElementById("search");
 const searchInput = document.getElementById("country");
@@ -33,6 +33,7 @@ const suggestCountries = ({ target }) => {
 
 searchInput.addEventListener("keypress", suggestCountries);
 
+
 const renderCountries = async (event) => {
   event.preventDefault();
   const { target } = event;
@@ -48,7 +49,7 @@ const renderCountries = async (event) => {
   const input = target.nodeName;
 
   const countries = await get[input]();
-  console.log(countries);
+
   countriesList.innerHTML = "";
   countries.forEach((item) => {
     countriesList.appendChild(countryPreview(item));

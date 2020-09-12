@@ -83,6 +83,10 @@ body {
   padding: 4rem;
 }
 
+.result.off {
+  display: none;
+}
+
 .result #countries {
   display: flex;
   flex-direction: column;
@@ -128,13 +132,15 @@ body {
 .detail__container {
   position: absolute;
   transform: translateY(-200%);
+  transition: transform 0.7s;
 }
 
 .detail__container.on {
   width: 100vw;
-  height: 100vh;
   padding: 3rem;
-  background-color: var(--color-dark-gray);
+  background-color: var(--color-very-light-gray);
+  transform: translateY(0%);
+  z-index: 5;
 }
 
 .detail__container .country__description {
@@ -156,4 +162,5 @@ body {
   border: none;
   background-color: var(--color-white);
   margin: 0.6rem;
+  padding: 1rem;
 }
