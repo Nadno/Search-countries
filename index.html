@@ -11,14 +11,49 @@
     <title>Countries Search</title>
   </head>
   <body>
-    <header class="header">
+    <header class="header box-shadow">
       <strong>Where in the world?</strong>
       <div class="header__dark__mode">Dark Mode</div>
     </header>
 
     <section class="detail__container">
       <article id="detail">
+        <div class="country__flag">
+          <img
+            src="https://restcountries.eu/data/dza.svg"
+            alt="${name}, Bandeira"
+          />
+        </div>
+          <div class="country__description">
+            <h2>Caralho</h2>
+            <span> <strong>Native Name:</strong> Não sei </span>
+            <span> <strong>População:</strong> 5265165165 </span>
+            <span> <strong>Region:</strong> Oceania </span>
+            <span> <strong>Sub Region:</strong> Caralhinho </span>
+            <span> <strong>Capital:</strong> Dracula </span>
+            <br />
+            <br />
 
+            <span> <strong>Top Level Domain:</strong> .be </span>
+            <span> <strong>Currencies:</strong> Euro </span>
+            <span> <strong>Languages:</strong> Dutch, French, German </span>
+          </div>
+
+          <div class="border__countries">
+            <strong>Border Countries:</strong>
+            <div class="buttons"> 
+              <button class="box-shadow" type="button">
+                Seila
+              </button>
+              <button class="box-shadow" type="button">
+                Seila
+              </button>
+              <button class="box-shadow" type="button">
+                Seila
+              </button>
+            </div>
+          </div>
+        </button>
       </article>
     </section>
 
@@ -37,7 +72,12 @@
           <datalist id="founded__countries"> </datalist>
         </div>
       </form>
-      <select class="search__select__region" id="region" name="region">
+
+      <select
+        class="search__select__region box-shadow"
+        id="region"
+        name="region"
+      >
         <option value="" selected>Filter by</option>
         <option value="Africa">Africa</option>
         <option value="Americas">America</option>

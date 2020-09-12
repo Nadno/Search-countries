@@ -1,4 +1,5 @@
-import { getCountriesPreview, getCountriesNames, getRegion } from "./api.js";
+import { getCountries, getCountriesNames, getRegion } from "./api.js";
+import { countryPreview } from "./countryElement.js";
 
 const search = document.getElementById("search");
 const searchInput = document.getElementById("country");
@@ -32,54 +33,25 @@ const suggestCountries = ({ target }) => {
 
 searchInput.addEventListener("keypress", suggestCountries);
 
-const listItem = ({ flag, name, region, capital, population }) => {
-  return `
-    <li>
-      <article>
-        <div class="country__flag">
-          <img
-            src="${flag}"
-            alt="${name}, Bandeira" 
-          >
-        </div>
-        
-        <button  class="country__button" onclick="detail(${name})">
-          <div class="country__description">
-              <h2>${name}</h2>
-              <span>
-                <strong>População:</strong> ${population}
-              </span>
-              <span>
-                <strong>Region:</strong> ${region}
-              </span>
-              <span>
-                <strong>Capital:</strong> ${capital}
-              </span>
-          </div>
-        </button>
-      </article>
-    </li>
-  `;
-};
-
 const renderCountries = async (event) => {
   event.preventDefault();
   const { target } = event;
-
+  
   const countriesList = document.getElementById("countries");
   countriesList.innerHTML = "Loading...";
 
+  const PARAMS = '?fields=flag;name;region;capital;population;';
   const get = {
-    FORM: () => getCountriesPreview(searchInput.value),
-    SELECT: () => getRegion(target.value),
+    FORM: () => getCountries('/name', searchInput.value, PARAMS),
+    SELECT: () => getRegion(target.value, PARAMS),
   };
   const input = target.nodeName;
 
   const countries = await get[input]();
-
+  console.log(countries);
   countriesList.innerHTML = "";
   countries.forEach((item) => {
-    countriesList.innerHTML += listItem(item);
+    countriesList.appendChild(countryPreview(item));
   });
 };
 

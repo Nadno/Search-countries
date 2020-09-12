@@ -16,7 +16,13 @@ html {
 }
 
 body {
+  position: relative;
+  padding-top: 12rem;
   background-color: var(--color-very-light-gray);
+}
+
+.box-shadow {
+  box-shadow: 1px 1px 4px var(--color-dark-gray);
 }
 
 .header {
@@ -29,9 +35,9 @@ body {
   padding: 1.4rem;
   font-size: 1.8rem;
   background-color: var(--color-white);
-  box-shadow: 1px 1px 4px var(--color-dark-gray);
   margin-bottom: 4rem;
 
+  z-index: 10;
   top: 0;
 }
 
@@ -40,7 +46,7 @@ body {
 }
 
 .search__country__form {
-  height: 12rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -70,7 +76,6 @@ body {
   border: none;
   border-radius: 0.4rem;
   padding: 1rem;
-  box-shadow: 1px 1px 4px var(--color-dark-gray);
 }
 
 .result {
@@ -88,8 +93,8 @@ body {
 
 .result #countries li {
   margin-top: 4rem;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   border-radius: 0 0 0.6rem 0.6rem;
+  background-color: var(--color-white);
 }
 
 .country__button {
@@ -107,6 +112,7 @@ body {
   padding: 1rem 1.4rem;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .country__description h2 {
@@ -117,4 +123,37 @@ body {
 .country__description span {
   font-size: 1.6rem;
   margin-top: 0.6rem;
+}
+
+.detail__container {
+  position: absolute;
+  transform: translateY(-200%);
+}
+
+.detail__container.on {
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem;
+  background-color: var(--color-dark-gray);
+}
+
+.detail__container .country__description {
+  width: 100%;
+  padding: 4rem 0;
+}
+
+.border__countries strong {
+  font-size: 2rem;
+}
+
+.border__countries .buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.border__countries button {
+  height: 4rem;
+  border: none;
+  background-color: var(--color-white);
+  margin: 0.6rem;
 }
