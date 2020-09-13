@@ -1,7 +1,8 @@
 import { getCountries, getCountriesNames, getRegion } from "./api.js";
+import { setPagination } from "./pagination.js";
 import countryPreview from "./preview.js";
 
-const search = document.getElementById("search");
+const searchName = document.getElementById("search");
 const searchInput = document.getElementById("country");
 const searchSelectRegion = document.querySelector(".search__select__region");
 const dataList = document.getElementById("founded__countries");
@@ -33,22 +34,9 @@ const suggestCountries = ({ target }) => {
 
 searchInput.addEventListener("keypress", suggestCountries);
 
-
-const renderCountries = async (event) => {
-  event.preventDefault();
-  const { target } = event;
-  
+export const renderCountries = (countries) => {
   const countriesList = document.getElementById("countries");
   countriesList.innerHTML = "Loading...";
-
-  const PARAMS = '?fields=flag;name;region;capital;population;';
-  const get = {
-    FORM: () => getCountries('/name', searchInput.value, PARAMS),
-    SELECT: () => getRegion(target.value, PARAMS),
-  };
-  const input = target.nodeName;
-
-  const countries = await get[input]();
 
   countriesList.innerHTML = "";
   countries.forEach((item) => {
@@ -56,5 +44,41 @@ const renderCountries = async (event) => {
   });
 };
 
-searchSelectRegion.addEventListener("change", renderCountries);
-search.addEventListener("submit", renderCountries);
+export const search = async (element, page = 1) => {
+  const params = "?fields=flag;name;region;capital;population;";
+  const get = {
+    FORM: () =>
+      getCountries(
+        {
+          name: searchInput.value,
+          path: "/name",
+          params,
+        }, page),
+
+    SELECT: () =>
+      getRegion(
+        {
+          name: searchSelectRegion.value,
+          params,
+        }, page),
+  };
+
+  const { countries, length } = await get[element]();
+  const maxPages = (length / 5);
+  
+  setPagination("element", element);
+  setPagination("maxPages", maxPages);
+  renderCountries(countries);
+};
+
+searchSelectRegion.addEventListener("change", () => {
+  const element = "SELECT";
+  search(element);
+});
+
+searchName.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const element = "FORM";
+  search(element)
+});
