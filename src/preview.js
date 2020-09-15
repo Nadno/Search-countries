@@ -2,7 +2,7 @@ import renderDetail from "./details.js";
 
 function detail(name) {
   const detailContainer = document.querySelector(".detail__container");
-  const result = document.querySelector(".result");
+  const result = document.getElementById("result");
 
   detailContainer.classList.toggle("on");
   result.classList.toggle("off");

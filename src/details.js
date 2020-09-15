@@ -1,14 +1,18 @@
 import { getCountry, getCountries } from "./api.js";
 
-const getBorders = async (country) => {
-  const { name } = await getCountries("/alpha", country, "?fields=name;");
+const getBorders = async (name) => {
+  const noPage = 0;
+
+  const path = "/alpha";
+  const params = "?fields=name;";
+  const { countries } = await getCountries({ path, name, params }, noPage);
+
   const button = document.createElement("button");
 
-  button.classList.add("box-shadow");
   button.type = "button";
-  button.innerText = name;
-
-  button.addEventListener("click", () => renderDetail(name));
+  button.innerText = countries.name;
+  button.className = "box-shadow";
+  button.addEventListener("click", () => renderDetail(countries.name));
 
   return button;
 };
@@ -31,7 +35,7 @@ const countryDetails = ({
   const description = document.createElement("div");
   const bordersCountries = document.createElement("div");
 
-  flagDiv.classList.add("country__flag");
+  flagDiv.className = "country__flag";
   flagDiv.innerHTML = `
     <img
       src="${flag}"
@@ -69,7 +73,7 @@ const countryDetails = ({
     </div>
   `;
 
-  bordersCountries.classList.add("border__countries");
+  bordersCountries.className = "border__countries";
 
   borders.forEach(async (country) =>
     bordersCountries.appendChild(await getBorders(country))

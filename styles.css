@@ -78,16 +78,16 @@ body {
   padding: 1rem;
 }
 
-.result {
-  margin-top: 0 4rem;
-  padding: 4rem;
+#result {
+  padding: 0 4rem;
+  padding-top: 6rem;
 }
 
-.result.off {
+#result.off {
   display: none;
 }
 
-.result #countries {
+#result #countries {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,7 +95,7 @@ body {
   list-style: none;
 }
 
-.result #countries li {
+#result #countries li {
   margin-top: 4rem;
   border-radius: 0 0 0.6rem 0.6rem;
   background-color: var(--color-white);
@@ -163,4 +163,24 @@ body {
   background-color: var(--color-white);
   margin: 0.6rem;
   padding: 1rem;
+}
+
+#page {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+#back__page,
+#next__page {
+  width: 8rem;
+  height: 4rem;
+  border: none;
+  
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  padding: 1rem;
+  margin: 0.6rem;
+  background-color: var(--color-white);
 }

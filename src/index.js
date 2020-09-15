@@ -1,5 +1,5 @@
 import { getCountries, getCountriesNames, getRegion } from "./api.js";
-import { setPagination } from "./pagination.js";
+import { getPage, renderPagination, setPagination } from "./pagination.js";
 import countryPreview from "./preview.js";
 
 const searchName = document.getElementById("search");
@@ -44,13 +44,13 @@ export const renderCountries = (countries) => {
   });
 };
 
-export const search = async (element, page = 1) => {
+export const search = async (element, value, page = 1) => {
   const params = "?fields=flag;name;region;capital;population;";
   const get = {
     FORM: () =>
       getCountries(
         {
-          name: searchInput.value,
+          name: value,
           path: "/name",
           params,
         }, page),
@@ -58,27 +58,31 @@ export const search = async (element, page = 1) => {
     SELECT: () =>
       getRegion(
         {
-          name: searchSelectRegion.value,
+          name: value,
           params,
         }, page),
   };
 
-  const { countries, length } = await get[element]();
-  const maxPages = (length / 5);
-  
+  await get[element]();
   setPagination("element", element);
-  setPagination("maxPages", maxPages);
+
+  const countries = getPage(page);
   renderCountries(countries);
 };
 
-searchSelectRegion.addEventListener("change", () => {
+
+searchSelectRegion.addEventListener("change", async () => {
   const element = "SELECT";
-  search(element);
+  setPagination("page", 1);
+  await search(element, searchSelectRegion.value);
 });
 
-searchName.addEventListener("submit", (event) => {
+
+
+searchName.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const element = "FORM";
-  search(element)
+  setPagination("page", 1);
+  await search(element, searchInput.value)
 });
