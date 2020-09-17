@@ -148,6 +148,11 @@ body {
   padding: 4rem 0;
 }
 
+.detail__container .error {
+  font-size: 2rem;
+  color: red;
+}
+
 .border__countries strong {
   font-size: 2rem;
 }

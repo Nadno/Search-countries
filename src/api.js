@@ -49,6 +49,8 @@ export const getCountries = async ({ path, name, params }, page) => {
     setPagination('data', countries);
     setPagination('maxPages', length / 5);
     renderPagination();
+
+    return countries;
   } catch (err) {
     throw new Error("Erro ao buscar países:", err);
   }

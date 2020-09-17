@@ -5,8 +5,7 @@ const getBorders = async (name) => {
 
   const path = "/alpha";
   const params = "?fields=name;";
-  const { countries } = await getCountries({ path, name, params }, noPage);
-
+  const countries = await getCountries({ path, name, params }, noPage);
   const button = document.createElement("button");
 
   button.type = "button";
@@ -17,81 +16,87 @@ const getBorders = async (name) => {
   return button;
 };
 
-const countryDetails = ({
-  flag,
-  name,
-  region,
-  subregion,
-  capital,
-  population,
-  nativeName,
-  topLevelDomain,
-  currencies,
-  languages,
-  borders,
-}) => {
-  const divMain = document.createElement("div");
-  const flagDiv = document.createElement("div");
-  const description = document.createElement("div");
-  const bordersCountries = document.createElement("div");
+const detail = () => {
+  const flagEl = document.querySelector("#detail-flag");
+  const nameEl = document.querySelector("#detail-country");
+  const nativeNameEl = document.querySelector("#detail-native-name");
+  const populationEl = document.querySelector("#detail-population");
+  const regionEl = document.querySelector("#detail-region");
+  const subregionEl = document.querySelector("#detail-subregion");
+  const capitalEl = document.querySelector("#detail-capital");
+  const topLevelDomainEl = document.querySelector("#detail-domain");
+  const currenciesEl = document.querySelector("#detail-currencies");
+  const languagesEl = document.querySelector("#detail-languages");
+  const borderCountriesEl = document.querySelector("#detail-borders");
 
-  flagDiv.className = "country__flag";
-  flagDiv.innerHTML = `
-    <img
-      src="${flag}"
-      alt="${name}, Bandeira" 
-    >
-  `;
+  return function ({
+    flag,
+    name,
+    region,
+    subregion,
+    capital,
+    population,
+    nativeName,
+    topLevelDomain,
+    currencies,
+    languages,
+    borders,
+  }) {
+    const elementMissing = [
+      document.querySelector("#detail-flag"),
+      document.querySelector("#detail-country"),
+      document.querySelector("#detail-native-name"),
+      document.querySelector("#detail-population"),
+      document.querySelector("#detail-region"),
+      document.querySelector("#detail-subregion"),
+      document.querySelector("#detail-capital"),
+      document.querySelector("#detail-domain"),
+      document.querySelector("#detail-currencies"),
+      document.querySelector("#detail-languages"),
+      document.querySelector("#detail-borders"),
+    ].includes(null);
+    
+    if (elementMissing) {
+      const detail = document.getElementById("detail");
+      detail.classList.add("error");
+      detail.innerHTML = "Erro ao renderizar a página";
+      return;
+    };
 
-  description.innerHTML = `
-    <div class="country__description">
-      <h2>${name}</h2>
-      <span> <strong>Native Name:</strong> ${nativeName}</span>
-      <span> <strong>População:</strong> ${population}</span>
-      <span> <strong>Region:</strong> ${region}</span>
-      <span> <strong>Sub Region:</strong> ${subregion}</span>
-      <span> <strong>Capital:</strong> ${capital}</span>
+    flagEl.src = flag;
+    flagEl.alt = `${name}, flag`;
+    nameEl.innerHTML = name;
+    regionEl.innerHTML = region;
+    subregionEl.innerHTML = subregion;
+    capitalEl.innerHTML = capital;
+    populationEl.innerHTML = population;
+    nativeNameEl.innerHTML = nativeName;
+    topLevelDomainEl.innerHTML = topLevelDomain;
 
-      <br />
-      <br />
+    languagesEl.innerHTML = languages
+      .map((lang) => {
+        return lang.name;
+      })
+      .join(", ");
 
-      <span> <strong>Top Level Domain:</strong> ${topLevelDomain} </span>
-      <span> <strong>Currencies:</strong> 
-        ${currencies
-          .map((currency) => {
-            return currency.name;
-          })
-          .join(", ")} 
-      </span>
-      <span> <strong>Languages:</strong> 
-        ${languages
-          .map((lang) => {
-            return lang.name;
-          })
-          .join(", ")}
-      </span>
-    </div>
-  `;
+    currenciesEl.innerHTML = currencies
+      .map((currency) => {
+        return currency.name;
+      })
+      .join(", ");
 
-  bordersCountries.className = "border__countries";
-
-  borders.forEach(async (country) =>
-    bordersCountries.appendChild(await getBorders(country))
-  );
-
-  divMain.appendChild(flagDiv);
-  divMain.appendChild(description);
-  divMain.appendChild(bordersCountries);
-
-  return divMain;
+    borderCountriesEl.innerHTML = "";
+    borders.forEach(async (country) =>
+      borderCountriesEl.appendChild(await getBorders(country))
+    );
+  };
 };
 
-async function renderDetail(name) {
-  const detailElement = document.getElementById("detail");
-  detailElement.innerHTML = "";
+const setDetail = detail();
 
+async function renderDetail(name) {
   const country = await getCountry(name);
-  detailElement.appendChild(countryDetails(country));
+  setDetail(country);
 }
 
 export default renderDetail;
