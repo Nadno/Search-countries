@@ -8,23 +8,21 @@ function detail(name) {
   result.classList.add("off");
 
   return renderDetail(name);
-};
+}
 
-const getBorders = async (name) => {
-  const noPage = 0;
-
+const getBorders = async (code) => {
   const path = "/alpha";
-  const params = "?fields=name;";
-  const countries = await getCountries({ path, name, params }, noPage);
+  const fields = ["name"];
+  const { name } = await getCountry(path, { name: code, fields });
   const button = document.createElement("button");
   const link = document.createElement("a");
 
   link.href = "#detail";
   button.type = "button";
-  button.innerText = countries.name;
+  button.innerText = name;
   button.className = "button box-shadow";
 
-  button.addEventListener("click", () => renderDetail(countries.name));
+  button.addEventListener("click", () => renderDetail(name));
   link.appendChild(button);
 
   return link;
@@ -44,7 +42,7 @@ const setAndClear = () => {
   const borderCountriesEl = document.querySelector("#detail-borders");
 
   return {
-    setDetail: function({
+    setDetail: function ({
       flag,
       name,
       region,
@@ -106,13 +104,13 @@ const setAndClear = () => {
       );
     },
 
-    clearDetail: function() {
+    clearDetail: function () {
       flagEl.src = "";
       flagEl.alt = "country, flag";
-      languagesEl = "";
-      currenciesEl = "";
+      languagesEl.innerHTML = "";
+      currenciesEl.innerHTML = "";
       nameEl.innerHTML = "";
-      borderCountriesEl = "";
+      borderCountriesEl.innerHTML = "";
       regionEl.innerHTML = "";
       subregionEl.innerHTML = "";
       capitalEl.innerHTML = "";
@@ -128,12 +126,26 @@ const { setDetail, clearDetail } = setAndClear();
 document.getElementById("back-detail").onclick = () => {
   detailContainer.classList.remove("on");
   result.classList.remove("off");
-  
-  return clearDetail();
+
+  clearDetail();
 };
 
 async function renderDetail(name) {
-  const country = await getCountry(name);
+  const path = "/name";
+  const fields = [
+    "flag",
+    "name",
+    "region",
+    "subregion",
+    "capital",
+    "population",
+    "nativeName",
+    "topLevelDomain",
+    "currencies",
+    "languages",
+    "borders",
+  ];
+  const [ country ] = await getCountry(path, { name, fields });
   setDetail(country);
 }
 

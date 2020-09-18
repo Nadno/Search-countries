@@ -22,7 +22,11 @@ body {
 }
 
 .box-shadow {
-  box-shadow: 1px 1px 4px var(--color-dark-gray);
+  box-shadow: 1px 1px 8px #d3d3d3;
+}
+
+.border-radius {
+  border-radius: 0.8rem;
 }
 
 .header {
@@ -87,64 +91,102 @@ body {
   display: none;
 }
 
-#result #countries {
-  display: flex;
-  flex-direction: column;
+#countries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 270px));
   justify-content: center;
-  align-items: center;
+  gap: 4rem;
+
   list-style: none;
 }
 
-#result #countries li {
-  margin-top: 4rem;
-  border-radius: 0 0 0.6rem 0.6rem;
+.preview {
+  width: 100%;
+  margin-bottom: 4rem;
   background-color: var(--color-white);
 }
 
-.country__button {
+.preview__article {
+  height: 100%;
   width: 100%;
-  border: none;
-  background-color: rgba(0,0,0,0);
 }
 
-.country__flag {
-  margin-top: 4rem;
+.flag__container {
+  height: 18rem;
 }
 
-.country__flag img {
+.preview__flag {
+  height: 100%;
   width: 100%;
-  border-radius: 0.6rem 0.6rem 0 0;
+  border-radius: 0.8rem 0.8rem 0 0;
 }
 
-.country__description {
-  padding: 1rem 1.4rem;
+.preview__button {
+  height: 100%;
+  width: 100%;
+
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: none;
+  background-color: transparent;
+}
+
+.preview__button:focus {
+  outline: none;
+}
+
+.preview__button:focus-within .country__description {
+  border: var(--color-dark-blue) solid;
+  border-radius: 1rem;
+}
+
+#result .country__description {
+  width: 100%;
+  display: flex;
+  padding: 2rem;
   flex-direction: column;
   text-align: left;
 }
 
-.country__description h2 {
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
+#result .country__description {
+  font-size: 1.4rem;
+  line-height: 2.8rem;
 }
 
-.country__description span {
-  font-size: 1.6rem;
-  margin-top: 0.6rem;
+#result .country__description h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1.4rem;
 }
 
 .detail__container {
   position: absolute;
   transform: translateY(-200%);
-  transition: transform 0.7s;
+  transition: transform 0.4s;
 }
 
 .detail__container.on {
   width: 100vw;
   padding: 3rem;
+
   background-color: var(--color-very-light-gray);
   transform: translateY(0%);
   z-index: 5;
+}
+
+.detail__container #detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.detail__container .country__flag {
+  width: 80vw;
+}
+
+.detail__container #detail-flag {
+  width: 100%;
 }
 
 .detail__container .country__description {
@@ -195,4 +237,10 @@ body {
   width: 8rem;
   height: 4rem;
   border: none;
+}
+
+@media (min-width: 700px) {
+  #countries {
+   
+  }
 }

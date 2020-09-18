@@ -1,6 +1,10 @@
-import { getCountries, getCountriesNames, getRegion } from "./api.js";
+import { getCountries, getRegion } from "./api.js";
 import { getPage, setPagination } from "./pagination.js";
 import countryPreview from "./preview.js";
+
+export const config = {
+  itemsForPage: 6,
+};
 
 const searchName = document.getElementById("search");
 const searchInput = document.getElementById("country");
@@ -45,25 +49,25 @@ export const renderCountries = (countries) => {
 };
 
 export const search = async (element, value, page = 1) => {
-  const params = "?fields=flag;name;region;capital;population";
-  const get = {
+  const fields = ["flag","name", "region", "capital", "population"];
+  const searchWith = {
     FORM: () =>
       getCountries(
         {
           name: value,
           path: "/name",
-          params,
+          fields,
         }, page),
 
     SELECT: () =>
       getRegion(
         {
           name: value,
-          params,
+          fields,
         }, page),
   };
 
-  await get[element]();
+  await searchWith[element]();
   const countries = getPage(page);
   renderCountries(countries);
   

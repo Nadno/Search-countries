@@ -1,3 +1,4 @@
+import { config } from "./index.js";
 import { activePagination, setPagination } from "./pagination.js";
 
 const BASE_URL = "https://restcountries.eu/rest/v2";
@@ -11,12 +12,12 @@ const setData = (pages, countries) => {
   activePagination(true);
 };
 
-export const getRegion = async ({ name, params }) => {
+export const getRegion = async ({ name, fields }) => {
   try {
     const countries = await fetch(
-      `${BASE_URL}/region/${name}${params ? params : ""}`
+      `${BASE_URL}/region/${name}${fields ? "?fields=" + fields.join(";") : ""}`
     ).then(parseJson);
-    const pages = countries.length / 5;
+    const pages = countries.length / config.itemsForPage;
 
     setData(pages, countries);
   } catch (err) {
@@ -24,22 +25,22 @@ export const getRegion = async ({ name, params }) => {
   }
 };
 
-export const getCountry = async (name) => {
+export const getCountry = async (path, { name, fields }) => {
   try {
-    const countries = await fetch(
-      `${BASE_URL}/name/${name}?fullText=true`
+    const country = await fetch(
+      `${BASE_URL}${path}/${name}?fullText=true${fields ? "?&fields=" + fields.join(";") : ""}`
     ).then(parseJson);
 
-    return countries[0];
+    return country;
   } catch (err) {
     throw new Error("Erro ao buscar país:", err);
   }
 };
 
-export const getCountries = async ({ path, name, params }) => {
+export const getCountries = async ({ path, name, fields }) => {
   try {
     const countries = await fetch(
-      `${BASE_URL}${path}/${name}${params ? params : ""}`
+      `${BASE_URL}${path}/${name}${fields ? "?fields=" + fields.join(";") : ""}`
     ).then(parseJson);
     const pages = countries.length / 5;
 
@@ -52,17 +53,5 @@ export const getCountries = async ({ path, name, params }) => {
     return countries;
   } catch (err) {
     throw new Error("Erro ao buscar países:", err);
-  }
-};
-
-export const getCountriesNames = async (name) => {
-  try {
-    const names = await fetch(`${BASE_URL}/name/${name}?fields=name`).then(
-      parseJson
-    );
-
-    return names;
-  } catch (err) {
-    throw new Error("Erro ao buscar sugestões:", err);
   }
 };
