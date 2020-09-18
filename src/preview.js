@@ -1,14 +1,4 @@
-import renderDetail from "./details.js";
-
-function detail(name) {
-  const detailContainer = document.querySelector(".detail__container");
-  const result = document.getElementById("result");
-
-  detailContainer.classList.toggle("on");
-  result.classList.toggle("off");
-
-  return renderDetail(name);
-};
+import detail from "./detail.js";
 
 const countryPreview = ({ flag, name, region, capital, population }) => {
   const li = document.createElement("li");

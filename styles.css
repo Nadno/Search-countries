@@ -107,6 +107,10 @@ body {
   background-color: rgba(0,0,0,0);
 }
 
+.country__flag {
+  margin-top: 4rem;
+}
+
 .country__flag img {
   width: 100%;
   border-radius: 0.6rem 0.6rem 0 0;
@@ -162,18 +166,28 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.border__countries button {
+.button {
   height: 4rem;
   border: none;
   background-color: var(--color-white);
   margin: 0.6rem;
   padding: 1rem;
+
+  font-size: 1.8rem;
+  font-weight: 500;
+
+  padding: 1rem;
+  margin: 0.6rem;
 }
 
 #page {
+  display: none;
+  margin-top: 2rem;
+}
+
+#page.on {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
 }
 
 #back__page,
@@ -181,11 +195,4 @@ body {
   width: 8rem;
   height: 4rem;
   border: none;
-  
-  font-size: 1.8rem;
-  font-weight: 700;
-
-  padding: 1rem;
-  margin: 0.6rem;
-  background-color: var(--color-white);
 }

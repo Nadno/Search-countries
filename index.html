@@ -17,11 +17,14 @@
     </header>
 
     <section class="detail__container">
+      <button type="button" class="button box-shadow" id="back-detail">
+        back
+      </button>
       <article id="detail">
         <div class="country__flag">
           <img
             src=""
-            alt=""
+            alt="country flag"
             id="detail-flag"
           />
         </div>
@@ -105,7 +108,18 @@
 
     <section id="result">
       <ul id="countries"></ul>
-      <div id="page"></div>
+      <div id="page">
+        <a href="#search">
+          <button id="back__page" class="box-shadow button" disabled="true">
+            back
+          </button>
+        </a>
+        <a href="#search">
+          <button id="next__page" class="box-shadow button">
+            next
+          </button>
+        </a>
+      </div>
     </section>
 
     <script type="module" src="src/index.js"></script>

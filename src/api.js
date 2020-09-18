@@ -1,22 +1,24 @@
-import { renderPagination, setPagination } from "./pagination.js";
+import { activePagination, setPagination } from "./pagination.js";
 
 const BASE_URL = "https://restcountries.eu/rest/v2";
 const searchInput = document.getElementById("country");
 
-const parseJson = (res) => {
-  return res.json();
+const parseJson = (res) => res.json();
+
+const setData = (pages, countries) => {
+  setPagination("data", countries);
+  setPagination("maxPages", pages);
+  activePagination(true);
 };
 
-export const getRegion = async ({ name, params }, page) => {
+export const getRegion = async ({ name, params }) => {
   try {
     const countries = await fetch(
       `${BASE_URL}/region/${name}${params ? params : ""}`
     ).then(parseJson);
-    const length = countries.length;
+    const pages = countries.length / 5;
 
-    setPagination('data', countries);
-    setPagination('maxPages', length / 5);
-    renderPagination();
+    setData(pages, countries);
   } catch (err) {
     throw new Error("Erro ao buscar região:", err);
   }
@@ -34,22 +36,19 @@ export const getCountry = async (name) => {
   }
 };
 
-export const getCountries = async ({ path, name, params }, page) => {
+export const getCountries = async ({ path, name, params }) => {
   try {
     const countries = await fetch(
       `${BASE_URL}${path}/${name}${params ? params : ""}`
     ).then(parseJson);
-    const length = countries.length;
+    const pages = countries.length / 5;
 
     if (countries?.status) {
-      searchInput.value = '';
-      return searchInput.setAttribute('placeholder', 'Nenhum país encontrado');
-    };
-    
-    setPagination('data', countries);
-    setPagination('maxPages', length / 5);
-    renderPagination();
+      searchInput.value = "";
+      return searchInput.setAttribute("placeholder", "Nenhum país encontrado");
+    }
 
+    setData(pages, countries);
     return countries;
   } catch (err) {
     throw new Error("Erro ao buscar países:", err);

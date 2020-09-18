@@ -1,13 +1,14 @@
 import { renderCountries } from "./index.js";
 
-const divPage = document.getElementById('page');
+const NEXT = "next__page";
+const BACK = "back__page";
+
 const pagination = {
   page: 1,
   maxPages: 0,
   element: '',
   data: [],
 };
-
 
 export const setPagination = (name, value) => {
   Object.assign(pagination, {
@@ -25,8 +26,8 @@ const nextPage = () => {
   const { page, maxPages } = pagination;
   
   const next = page + 1;
-  if (next >= maxPages) disableButton('next__page', true);
-  if (next === 2) disableButton('back__page', false);
+  if (next >= maxPages) disableButton(NEXT, true);
+  if (next === 2) disableButton(BACK, false);
   
   const countries = getPage(next);
   renderCountries(countries);
@@ -45,31 +46,18 @@ const backPage = () => {
   setPagination('page', back);
 };
 
-export const renderPagination = () => {
-  const next = document.createElement('button');
-  const back = document.createElement('button');
-  const link1 = document.createElement('a');
-  const link2 = document.createElement('a');
+const nextEl = document.getElementById(NEXT);
+const backEl = document.getElementById(BACK);
 
-  link1.href = "#search";
-  link2.href = "#search";
-  
-  next.id = 'next__page';
-  next.innerText = 'next';
-  next.className = "box-shadow";
+nextEl.addEventListener('click', nextPage);
+backEl.addEventListener('click', backPage);
+
+export const activePagination = (toggle) => {
+  const page = document.getElementById("page");
   if (pagination.maxPages <= 1)
-    next.setAttribute('disabled', true);
-  next.addEventListener('click', nextPage);
-  
-  back.id = 'back__page';
-  back.innerText = 'back';
-  back.className = "box-shadow";
-  back.setAttribute('disabled', true);
-  back.addEventListener('click', backPage);
+    nextEl.disabled = true;
 
-  divPage.innerHTML = '';
-  link1.appendChild(back);
-  link2.appendChild(next);
-  divPage.appendChild(link1);
-  divPage.appendChild(link2);
+  toggle
+    ? page.classList.add("on")
+    : page.classList.remove("on");
 };
