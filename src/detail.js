@@ -1,4 +1,4 @@
-import { getCountry, getCountries } from "./api.js";
+import { getCountry } from "./api.js";
 
 const detailContainer = document.querySelector(".detail__container");
 const result = document.getElementById("result");
@@ -20,7 +20,7 @@ const getBorders = async (code) => {
   link.href = "#detail";
   button.type = "button";
   button.innerText = name;
-  button.className = "button box-shadow";
+  button.className = "border__country";
 
   button.addEventListener("click", () => renderDetail(name));
   link.appendChild(button);
@@ -28,9 +28,16 @@ const getBorders = async (code) => {
   return link;
 };
 
+const joinCountryName = (item) =>
+  item
+    .map(({ name }) => {
+      return name;
+    })
+    .join(", ");
+
 const setAndClear = () => {
   const flagEl = document.querySelector("#detail-flag");
-  const nameEl = document.querySelector("#detail-country");
+  const nameEl = document.querySelector("#detail-name");
   const nativeNameEl = document.querySelector("#detail-native-name");
   const populationEl = document.querySelector("#detail-population");
   const regionEl = document.querySelector("#detail-region");
@@ -57,7 +64,7 @@ const setAndClear = () => {
     }) {
       const elementMissing = [
         document.querySelector("#detail-flag"),
-        document.querySelector("#detail-country"),
+        document.querySelector("#detail-name"),
         document.querySelector("#detail-native-name"),
         document.querySelector("#detail-population"),
         document.querySelector("#detail-region"),
@@ -78,30 +85,29 @@ const setAndClear = () => {
 
       flagEl.src = flag;
       flagEl.alt = `${name}, flag`;
-      nameEl.innerHTML = name;
-      regionEl.innerHTML = region;
-      subregionEl.innerHTML = subregion;
-      capitalEl.innerHTML = capital;
-      populationEl.innerHTML = population;
-      nativeNameEl.innerHTML = nativeName;
-      topLevelDomainEl.innerHTML = topLevelDomain;
-
-      languagesEl.innerHTML = languages
-        .map((lang) => {
-          return lang.name;
-        })
-        .join(", ");
-
-      currenciesEl.innerHTML = currencies
-        .map((currency) => {
-          return currency.name;
-        })
-        .join(", ");
-
-      borderCountriesEl.innerHTML = "";
-      borders.forEach(async (country) =>
-        borderCountriesEl.appendChild(await getBorders(country))
+      nameEl.insertAdjacentHTML("afterbegin", name);
+      regionEl.insertAdjacentHTML("afterbegin", region);
+      subregionEl.insertAdjacentHTML("afterbegin", subregion);
+      capitalEl.insertAdjacentHTML("afterbegin", capital);
+      populationEl.insertAdjacentHTML(
+        "afterbegin",
+        population.toLocaleString("basic")
       );
+      nativeNameEl.insertAdjacentHTML("afterbegin", nativeName);
+      topLevelDomainEl.insertAdjacentHTML("afterbegin", topLevelDomain);
+
+      languagesEl.insertAdjacentHTML("afterbegin", joinCountryName(languages))
+      currenciesEl.insertAdjacentHTML("afterbegin", joinCountryName(currencies))
+      
+      if (borders.length) {
+        borderCountriesEl.insertAdjacentHTML(
+          "afterbegin",
+          "<div><strong>Países próximos: </strong></div>"
+        );
+        borders.forEach(async (country) =>
+          borderCountriesEl.appendChild(await getBorders(country))
+        );
+      }
     },
 
     clearDetail: function () {
@@ -126,8 +132,6 @@ const { setDetail, clearDetail } = setAndClear();
 document.getElementById("back-detail").onclick = () => {
   detailContainer.classList.remove("on");
   result.classList.remove("off");
-
-  clearDetail();
 };
 
 async function renderDetail(name) {
@@ -145,7 +149,8 @@ async function renderDetail(name) {
     "languages",
     "borders",
   ];
-  const [ country ] = await getCountry(path, { name, fields });
+  const [country] = await getCountry(path, { name, fields });
+  clearDetail();
   setDetail(country);
 }
 

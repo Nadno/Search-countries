@@ -19,20 +19,24 @@ const countryPreview = ({ flag, name, region, capital, population }) => {
     >
   `;
   const PREVIEW_DESCRIPTION = `
-    <div class="country__description">
-      <h2>${name}</h2>
-      <span>
-        <strong>População:</strong>
-        ${population}
-      </span>
-      <span>
-        <strong>Region:</strong>
-        ${region}
-      </span>
-      <span>
-        <strong>Capital:</strong>
-        ${capital}
-      </span>
+    <div class="country__content">
+      <div class="country__name">
+        <strong>${name}</strong>
+      </div>
+      <div class="country__detail">
+        <div>
+          <strong>População:</strong>
+          ${population.toLocaleString("basic")}
+        </div>
+        <div>
+          <strong>Region:</strong>
+          ${region}
+        </div>
+        <div>
+          <strong>Capital:</strong>
+          ${capital}
+        </div>
+      </div>
     </div>
   `;
 
@@ -42,7 +46,7 @@ const countryPreview = ({ flag, name, region, capital, population }) => {
   button.appendChild(flagDiv);
   
   button.insertAdjacentHTML("beforeend", PREVIEW_DESCRIPTION);
-  article.className = "preview__article box-shadow border-radius";
+  article.className = "preview__content box-shadow border-radius";
 
   Object.assign(button, PREVIEW_BUTTON);
   button.addEventListener("click", () => detail(name));

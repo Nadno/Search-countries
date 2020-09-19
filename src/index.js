@@ -2,41 +2,25 @@ import { getCountries, getRegion } from "./api.js";
 import { getPage, setPagination } from "./pagination.js";
 import countryPreview from "./preview.js";
 
-export const config = {
-  itemsForPage: 6,
-};
-
 const searchName = document.getElementById("search");
 const searchInput = document.getElementById("country");
 const searchSelectRegion = document.querySelector(".search__select__region");
-const dataList = document.getElementById("founded__countries");
 
 let waitToGetValue = 0;
 
-const setDataList = (countries) => {
-  dataList.innerHTML = "";
-  countries.forEach(({ name }, index) => {
-    if (index > 4) return;
-    const option = document.createElement("option");
+// const suggestCountries = ({ target }) => {
+//   if (waitToGetValue) clearTimeout(waitToGetValue);
 
-    option.value = name;
-    dataList.appendChild(option);
-  });
-};
+//   waitToGetValue = setTimeout(searchForNames, 1000);
 
-const suggestCountries = ({ target }) => {
-  if (waitToGetValue) clearTimeout(waitToGetValue);
+//   async function searchForNames() {
+//     waitToGetValue = 0;
+//     const countries = await getCountriesNames(target.value);
+//     setDataList(countries);
+//   }
+// };
 
-  waitToGetValue = setTimeout(searchForNames, 1000);
-
-  async function searchForNames() {
-    waitToGetValue = 0;
-    const countries = await getCountriesNames(target.value);
-    setDataList(countries);
-  }
-};
-
-searchInput.addEventListener("keypress", suggestCountries);
+// searchInput.addEventListener("keypress", suggestCountries);
 
 export const renderCountries = (countries) => {
   const countriesList = document.getElementById("countries");

@@ -1,0 +1,17 @@
+.country__content {
+  width: 100%;
+  padding: 2.6rem 2.4rem 4rem 2.4rem;
+  
+  text-align: left;
+  color: var(--text-color);
+
+  .country__name {
+    font-size: 1.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .country__detail {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+  }
+}

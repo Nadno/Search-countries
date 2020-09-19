@@ -1,4 +1,5 @@
-import { config, renderCountries } from "./index.js";
+import config from "./config.js";
+import { renderCountries } from "./index.js";
 
 const NEXT = "next__page";
 const BACK = "back__page";

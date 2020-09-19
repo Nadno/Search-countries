@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/styles/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Countries Search, procure por países</title>
+  </head>
+  <body>
+    <header class="header box-shadow">
+      <strong>Aonde no mundo?</strong>
+      <div class="header__dark__mode">
+        <label for="color-mode">Mode escuro</label>
+        <input type="checkbox" id="color-mode" />
+      </div>
+    </header>
+
+    <section class="detail__container">
+      <button type="button" class="button box-shadow" id="back-detail">
+        back
+      </button>
+      <article id="detail">
+        <div class="flag__container">
+          <img src="" alt="country flag" id="detail-flag" />
+        </div>
+
+        <div class="country__content">
+          <div class="country__name" >
+            <strong id="detail-name"></strong>
+          </div>
+          <div class="country__detail">
+            <div class="block">
+              <div>
+                <strong>Native Name:</strong>
+                <bdi id="detail-native-name"></bdi>
+              </div>
+              <div>
+                <strong>População:</strong>
+                <span id="detail-population"></span>
+              </div>
+              <div>
+                <strong>Region:</strong>
+                <span id="detail-region"></span>
+              </div>
+              <div>
+                <strong>Sub Region:</strong>
+                <span id="detail-subregion"></span>
+              </div>
+              <div>
+                <strong>Capital:</strong>
+                <span id="detail-capital"></span>
+              </div>
+            </div>
+
+            <div class="block">
+              <div class="">
+                <strong>Top Level Domain:</strong>
+                <span id="detail-domain"></span>
+              </div>
+              <div>
+                <strong>Currencies:</strong>
+                <span id="detail-currencies"></span>
+              </div>
+              <div>
+                <strong>Idiomas:</strong>
+                <span id="detail-languages"></span>
+              </div>
+            </div>
+          </div>
+          <div class="border__countries" id="detail-borders"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="search__country" id="search">
+      <form class="search__country__form box-shadow" id="search">
+        <button class="search__submit" type="submit">
+          <img
+            class="submit__icon"
+            src="/public/assets/search.svg"
+            alt="Procurar país"
+          />
+        </button>
+        <fieldset class="search__input__block">
+          <input
+            type="text"
+            class="search__input"
+            id="country"
+            name="country"
+            placeholder="Digite o nome de um país"
+          />
+        </fieldset>
+      </form>
+
+      <select
+        class="search__select__region box-shadow"
+        id="region"
+        name="region"
+      >
+        <option value="" selected>Filter by</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">America</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </section>
+
+    <section id="result">
+      <ul id="countries"></ul>
+      <div id="page">
+        <a href="#search">
+          <button id="back__page" class="box-shadow button" disabled="true">
+            back
+          </button>
+        </a>
+        <a href="#search">
+          <button id="next__page" class="box-shadow button">next</button>
+        </a>
+      </div>
+    </section>
+
+    <script type="module" src="/src/index.js"></script>
+  </body>
+</html>

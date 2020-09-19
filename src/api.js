@@ -1,4 +1,4 @@
-import { config } from "./index.js";
+import config from "./config.js";
 import { activePagination, setPagination } from "./pagination.js";
 
 const BASE_URL = "https://restcountries.eu/rest/v2";
