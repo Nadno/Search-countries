@@ -5,6 +5,7 @@
 }
 
 html {
+  --font-size: 62%;
   --color-elements: hsl(0, 0%, 100%);
   --text-color: hsl(200, 15%, 8%);
   --input-text: hsl(0, 0%, 52%);
@@ -12,13 +13,13 @@ html {
   
   font-family: 'Nunito Sans', sans-serif;
   color: var(--text-color);
-  font-size: 62.5%;
+  font-size: var(--font-size);
 }
 
 body {
-  position: relative;
   padding-top: 12rem;
   background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
 .box-shadow {
@@ -39,6 +40,7 @@ body {
   padding: 1rem;
 
   background-color: var(--color-elements);
+  cursor: pointer;
 }
 
 @import "./country";

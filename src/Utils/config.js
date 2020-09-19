@@ -1,9 +1,12 @@
-import { getStyle } from "./colorMode.js";
+import { getItem } from "./storage.js";
+import { getStyle, changeColorMode } from "./style.js";
 
 const html = document.querySelector("html");
 const config = {
   itemsForPage: 6,
+  fontSize: Number(getStyle(html, "--font-size").replace("%", "")),
   mode: {
+    selected: 0,
     initial: {
       textColor: getStyle(html, "--text-color"),
       inputText: getStyle(html, "--input-text-color"),
@@ -18,5 +21,12 @@ const config = {
     },
   },
 };
+
+(function getConfigOnStorage() {
+  const save = getItem("config");
+  if (!save) return;
+  Object.assign(config, save);
+  if (config.mode.selected) changeColorMode(config.mode.dark, true);
+})();
 
 export default config;

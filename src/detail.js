@@ -1,6 +1,6 @@
 import { getCountry } from "./api.js";
 
-const detailContainer = document.querySelector(".detail__container");
+const detailContainer = document.querySelector("#detail__container");
 const result = document.getElementById("result");
 
 function detail(name) {

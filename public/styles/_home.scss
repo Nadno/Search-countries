@@ -1,11 +1,11 @@
-.header {
+#header {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.4rem;
+  padding: 1.4rem 4rem;
   font-size: 1.8rem;
   background-color: var(--color-elements);
   margin-bottom: 4rem;
@@ -14,7 +14,7 @@
   top: 0;
 }
 
-.search__country {
+#search__section {
   padding: 0 2rem;
   .search__country__form {
     display: flex;
@@ -28,6 +28,7 @@
       padding: 0.6rem 1.4rem;
       margin-right: 0.4rem;
       background-color: var(--color-elements);
+      cursor: pointer;
       .submit__icon {
         height: 100%;
       }
@@ -55,29 +56,30 @@
     padding: 1rem;
     color: var(--input-text);
     background-color: var(--color-elements);
+    cursor: pointer;
   }
 }
 
 #result {
-  padding: 0 4rem;
+  width: 100vw;
+  padding: 0 2.4rem;
   padding-top: 6rem;
-
+  
   #countries {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 270px));
     justify-content: center;
-    gap: 4rem;
+    gap: 2.4rem;
   
     list-style: none;
 
     .preview {
       width: 100%;
-      margin-bottom: 4rem;
       background-color: var(--color-elements);
     }
 
     .preview__content {
-
+      height: 100%;
       .flag__container {
         height: 18rem;
       }
@@ -87,22 +89,10 @@
         width: 100%;
         border-radius: 0.8rem 0.8rem 0 0;
       }
-
-      // .country__details {
-      //   width: 100%;
-      //   display: flex;
-      //   flex-direction: column;
-      //   padding: 2rem;
-
-      //   text-align: left;
-      //   font-size: 1.4rem;
-      //   line-height: 2.8rem;
-      //   color: var(--text-color);
-      // }
     }
 
     .preview__button {
-      height: 100%;
+      cursor: pointer;
       width: 100%;
     
       display: flex;
@@ -132,7 +122,7 @@
 
 #page {
   display: none;
-  margin-top: 2rem;
+  margin: 2rem;
 }
 
 #page.on {
@@ -146,10 +136,14 @@
   height: 4rem;
   border: none;
   color: var(--text-color);
+
+  &:disabled {
+    opacity: 0.4;
+  }
 }
 
 @media (min-width: 600px) {
-  .search__country {
+  #search__section {
     display: flex;
     justify-content: space-between;
 
@@ -159,5 +153,9 @@
     .search__select__region {
       width: 18vw;
     }
+  }
+
+  #countries {
+    flex-direction: row;
   }
 }

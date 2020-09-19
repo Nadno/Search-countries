@@ -1,4 +1,4 @@
-import config from "./config.js";
+import config from "./Utils/config.js";
 import { renderCountries } from "./index.js";
 
 const NEXT = "next__page";
