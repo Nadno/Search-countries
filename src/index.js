@@ -1,6 +1,7 @@
 import { getCountries, getRegion } from "./api.js";
 import { getPage, setPagination } from "./pagination.js";
 import countryPreview from "./preview.js";
+import { selectIsValidValue, searchIsValidValue } from "./Utils/validation.js";
 
 const searchName = document.getElementById("search");
 const searchInput = document.getElementById("country");
@@ -61,14 +62,21 @@ export const search = async (element, value, page = 1) => {
 
 
 searchSelectRegion.addEventListener("change", async () => {
+  const { value } = searchSelectRegion;
   const element = "SELECT";
-  await search(element, searchSelectRegion.value);
+  if (selectIsValidValue(value)) await search(element, value);
 });
 
 
 
 searchName.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const { value } = searchInput;
   const element = "FORM";
-  await search(element, searchInput.value);
+  if (searchIsValidValue(value)) await search(element, value);
 });
+
+searchInput.addEventListener("blur", ({ target }) => {
+  target.placeholder = "Digite o nome de um país";
+  target.classList.remove("error");
+})

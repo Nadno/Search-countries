@@ -45,6 +45,16 @@
         color: var(--input-text);
         background-color: var(--color-elements);
       }
+          .error {
+            &::-webkit-input-placeholder { color: red; }
+            &::-moz-placeholder { color: red }
+            &:-moz-placeholder { color: red }
+
+            &:focus {
+              outline: none;
+              border: 1px solid red;
+            }
+          }
     }
   }
 
