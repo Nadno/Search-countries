@@ -1,4 +1,6 @@
-import { getCountry } from "./api.js";
+import { getCountry } from "./Utils/api.js";
+import { detailElementsIsNotOk } from "./Utils/validation.js";
+import { transformKey } from "./Utils/style.js";
 
 const detailContainer = document.querySelector("#detail__container");
 const result = document.getElementById("result");
@@ -28,106 +30,58 @@ const getBorders = async (code) => {
   return link;
 };
 
-const joinCountryName = (item) =>
+const joinName = (item) =>
   item
     .map(({ name }) => {
       return name;
     })
     .join(", ");
 
-const setAndClear = () => {
-  const flagEl = document.querySelector("#detail-flag");
-  const nameEl = document.querySelector("#detail-name");
-  const nativeNameEl = document.querySelector("#detail-native-name");
-  const populationEl = document.querySelector("#detail-population");
-  const regionEl = document.querySelector("#detail-region");
-  const subregionEl = document.querySelector("#detail-subregion");
-  const capitalEl = document.querySelector("#detail-capital");
-  const topLevelDomainEl = document.querySelector("#detail-domain");
-  const currenciesEl = document.querySelector("#detail-currencies");
-  const languagesEl = document.querySelector("#detail-languages");
-  const borderCountriesEl = document.querySelector("#detail-borders");
+const setDetailElement = (element, value) =>
+  document.querySelector(element).insertAdjacentHTML("afterbegin", value);
 
-  return {
-    setDetail: function ({
-      flag,
-      name,
-      region,
-      subregion,
-      capital,
-      population,
-      nativeName,
-      topLevelDomain,
-      currencies,
-      languages,
-      borders,
-    }) {
-      const elementMissing = [
-        document.querySelector("#detail-flag"),
-        document.querySelector("#detail-name"),
-        document.querySelector("#detail-native-name"),
-        document.querySelector("#detail-population"),
-        document.querySelector("#detail-region"),
-        document.querySelector("#detail-subregion"),
-        document.querySelector("#detail-capital"),
-        document.querySelector("#detail-domain"),
-        document.querySelector("#detail-currencies"),
-        document.querySelector("#detail-languages"),
-        document.querySelector("#detail-borders"),
-      ].includes(null);
+const clearDetailElement = (element) =>
+  (document.querySelector(element).innerHTML = "");
 
-      if (elementMissing) {
-        const detail = document.getElementById("detail");
-        detail.classList.add("error");
-        detail.innerHTML = "Erro ao renderizar a página";
-        return;
-      }
-
-      flagEl.src = flag;
-      flagEl.alt = `${name}, flag`;
-      nameEl.insertAdjacentHTML("afterbegin", name);
-      regionEl.insertAdjacentHTML("afterbegin", region);
-      subregionEl.insertAdjacentHTML("afterbegin", subregion);
-      capitalEl.insertAdjacentHTML("afterbegin", capital);
-      populationEl.insertAdjacentHTML(
-        "afterbegin",
-        population.toLocaleString("basic")
-      );
-      nativeNameEl.insertAdjacentHTML("afterbegin", nativeName);
-      topLevelDomainEl.insertAdjacentHTML("afterbegin", topLevelDomain);
-
-      languagesEl.insertAdjacentHTML("afterbegin", joinCountryName(languages))
-      currenciesEl.insertAdjacentHTML("afterbegin", joinCountryName(currencies))
-      
-      if (borders.length) {
-        borderCountriesEl.insertAdjacentHTML(
-          "afterbegin",
-          "<div><strong>Países próximos: </strong></div>"
-        );
-        borders.forEach(async (country) =>
-          borderCountriesEl.appendChild(await getBorders(country))
-        );
-      }
-    },
-
-    clearDetail: function () {
-      flagEl.src = "";
-      flagEl.alt = "country, flag";
-      languagesEl.innerHTML = "";
-      currenciesEl.innerHTML = "";
-      nameEl.innerHTML = "";
-      borderCountriesEl.innerHTML = "";
-      regionEl.innerHTML = "";
-      subregionEl.innerHTML = "";
-      capitalEl.innerHTML = "";
-      populationEl.innerHTML = "";
-      nativeNameEl.innerHTML = "";
-      topLevelDomainEl.innerHTML = "";
-    },
-  };
+const renderDetailElement = (detail) => {
+  if (["flag", "borders"].includes(detail)) return;
+  const element = `#detail-${transformKey(detail)}`;
+  clearDetailElement(element);
+  setDetailElement(element, country[detail]);
 };
 
-const { setDetail, clearDetail } = setAndClear();
+const setDetail = (country) => {
+  if (detailElementsIsNotOk()) {
+    const detail = document.getElementById("detail");
+    detail.classList.add("error");
+    detail.innerHTML = "Erro ao renderizar a página";
+    return;
+  }
+  const { flag, name, borders, currencies, languages } = country;
+  const flagEl = document.querySelector("#detail-flag");
+  const borderCountriesEl = document.querySelector("#detail-borders");
+
+  flagEl.src = flag;
+  flagEl.alt = `${name}, flag`;
+
+  Object.assign(country, {
+    population: country.population.toLocaleString("basic"),
+    currencies: joinName(currencies),
+    languages: joinName(languages),
+  });
+  Object.keys(country).map(renderDetailElement);
+
+  borderCountriesEl.innerHTML = "";
+  if (borders.length) {
+    borderCountriesEl.insertAdjacentHTML(
+      "afterbegin",
+      "<div><strong>Países próximos: </strong></div>"
+    );
+    borders.forEach(async (country) =>
+      borderCountriesEl.appendChild(await getBorders(country))
+    );
+  }
+};
 
 document.getElementById("back-detail").onclick = () => {
   detailContainer.classList.remove("on");
@@ -150,7 +104,7 @@ async function renderDetail(name) {
     "borders",
   ];
   const [country] = await getCountry(path, { name, fields });
-  clearDetail();
+
   setDetail(country);
 }
 

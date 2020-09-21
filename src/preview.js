@@ -5,7 +5,7 @@ const PREVIEW_BUTTON = {
   className: "preview__button",
 };
 
-const countryPreview = ({ flag, name, region, capital, population }) => {
+const preview = ({ flag, name, region, capital, population }) => {
   const li = document.createElement("li");
   const article = document.createElement("article");
   const button = document.createElement("button");
@@ -41,12 +41,12 @@ const countryPreview = ({ flag, name, region, capital, population }) => {
   `;
 
   li.className = "preview border-radius";
-  flagDiv.className = "flag__container border-radius";
+  flagDiv.className = "flag__container";
   flagDiv.insertAdjacentHTML("beforeend", PREVIEW_FLAG);
   button.appendChild(flagDiv);
   
   button.insertAdjacentHTML("beforeend", PREVIEW_DESCRIPTION);
-  article.className = "preview__content box-shadow border-radius";
+  article.className = "preview__content";
 
   Object.assign(button, PREVIEW_BUTTON);
   button.addEventListener("click", () => detail(name));
@@ -57,4 +57,13 @@ const countryPreview = ({ flag, name, region, capital, population }) => {
   return li;
 };
 
-export default countryPreview;
+const renderCountries = (countries) => {
+  const countriesList = document.getElementById("countries");
+
+  countriesList.innerHTML = "";
+  countries.forEach((country) =>
+    countriesList.appendChild(preview(country))
+  );
+};
+
+export default renderCountries;

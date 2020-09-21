@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 html {
@@ -28,6 +29,12 @@ body {
 
 .border-radius {
   border-radius: 0.8rem;
+}
+
+.input-focus {
+  &:focus {
+    border: 2px var(--text-color) solid;
+  }
 }
 
 .button {

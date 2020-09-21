@@ -1,5 +1,5 @@
 import config from "./Utils/config.js";
-import { renderCountries } from "./index.js";
+import renderCountries from "./preview.js";
 
 const NEXT = "next__page";
 const BACK = "back__page";
@@ -7,7 +7,6 @@ const BACK = "back__page";
 const pagination = {
   page: 1,
   maxPages: 0,
-  element: "",
   data: [],
 };
 

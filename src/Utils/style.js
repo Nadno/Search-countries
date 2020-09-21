@@ -7,13 +7,12 @@ export function getStyle(element, style) {
   return window.getComputedStyle(element).getPropertyValue(style).trim();
 }
 
-const transformKey = (key) =>
-  "--" + key.replace(/([A-Z])/, "-$1").toLowerCase();
+export const transformKey = (key) => key.replace(/([A-Z])/, "-$1").toLowerCase();
 
 export const changeColorMode = (colors, selectedMode) => {
   document.querySelector("#color-mode").checked = selectedMode;
   Object.keys(colors).map((key) => {
-    html.style.setProperty(transformKey(key), colors[key]);
+    html.style.setProperty(`--${transformKey(key)}`, colors[key]);
   });
 }
   

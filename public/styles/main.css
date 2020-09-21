@@ -3,6 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  outline: none;
 }
 
 html {
@@ -22,13 +23,17 @@ body {
   overflow-x: hidden;
 }
 
-.box-shadow, #detail__container #back-detail, #detail .border__countries .border__country {
+.box-shadow, #detail__container #back-detail, #detail .border__countries .border__country, #result .preview__content {
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
           box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-.border-radius {
+.border-radius, #result .preview__content, #result .preview__content .flag__container {
   border-radius: 0.8rem;
+}
+
+.input-focus:focus, #search__section .search__submit:focus, #search__section .search__input__block .search__input:focus, #search__section .search__select__region:focus {
+  border: 2px var(--text-color) solid;
 }
 
 .button, #detail__container #back-detail, #detail .border__countries .border__country {
@@ -234,7 +239,7 @@ body {
   background-color: var(--color-elements);
 }
 
-#search__section .search__country__form .search__submit {
+#search__section .search__submit {
   height: 3.4rem;
   border: none;
   padding: 0.6rem 1.4rem;
@@ -243,16 +248,16 @@ body {
   cursor: pointer;
 }
 
-#search__section .search__country__form .search__submit .submit__icon {
+#search__section .search__submit .submit__icon {
   height: 100%;
 }
 
-#search__section .search__country__form .search__input__block {
+#search__section .search__input__block {
   width: 100%;
   border: none;
 }
 
-#search__section .search__country__form .search__input__block .search__input {
+#search__section .search__input__block .search__input {
   width: 100%;
   height: 4rem;
   border: none;
@@ -261,20 +266,19 @@ body {
   background-color: var(--color-elements);
 }
 
-#search__section .search__country__form .search__input__block .error::-webkit-input-placeholder {
-  color: red;
+#search__section .search__input__block .error::-webkit-input-placeholder {
+  color: #df5f5f;
 }
 
-#search__section .search__country__form .search__input__block .error::-moz-placeholder {
-  color: red;
+#search__section .search__input__block .error::-moz-placeholder {
+  color: #df5f5f;
 }
 
-#search__section .search__country__form .search__input__block .error:-moz-placeholder {
-  color: red;
+#search__section .search__input__block .error:-moz-placeholder {
+  color: #df5f5f;
 }
 
-#search__section .search__country__form .search__input__block .error:focus {
-  outline: none;
+#search__section .search__input__block .error:focus {
   border: 1px solid red;
 }
 
@@ -282,8 +286,7 @@ body {
   height: 4rem;
   width: 60%;
   border: none;
-  border-radius: 0.4rem;
-  padding: 1rem;
+  padding: 0 1.6rem;
   color: var(--input-text);
   background-color: var(--color-elements);
   cursor: pointer;
@@ -307,26 +310,26 @@ body {
   list-style: none;
 }
 
-#result #countries .preview {
+#result .preview {
   width: 100%;
   background-color: var(--color-elements);
 }
 
-#result #countries .preview__content {
+#result .preview__content {
   height: 100%;
 }
 
-#result #countries .preview__content .flag__container {
+#result .preview__content .flag__container {
   height: 18rem;
 }
 
-#result #countries .preview__content .preview__flag {
+#result .preview__content .preview__flag {
   height: 100%;
   width: 100%;
   border-radius: 0.8rem 0.8rem 0 0;
 }
 
-#result #countries .preview__button {
+#result .preview__button {
   cursor: pointer;
   width: 100%;
   display: -webkit-box;
@@ -343,25 +346,17 @@ body {
   background-color: transparent;
 }
 
-#result #countries .preview__button:focus {
-  outline: none;
-}
-
-#result #countries .preview__button:focus-within .country__content {
-  border: var(--text-color) solid;
+#result .preview__button:focus-within .country__content {
+  border: 2px var(--text-color) solid;
   border-radius: 1rem;
 }
 
-#result.off {
-  display: none;
-}
-
-#page {
+#result #page {
   display: none;
   margin: 2rem;
 }
 
-#page.on {
+#result #page.on {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -370,17 +365,21 @@ body {
           justify-content: space-between;
 }
 
-#back__page,
-#next__page {
+#result #back__page,
+#result #next__page {
   width: 8rem;
   height: 4rem;
   border: none;
   color: var(--text-color);
 }
 
-#back__page:disabled,
-#next__page:disabled {
+#result #back__page:disabled,
+#result #next__page:disabled {
   opacity: 0.4;
+}
+
+#result.off {
+  display: none;
 }
 
 @media (min-width: 600px) {

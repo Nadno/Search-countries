@@ -1,6 +1,5 @@
-import { getCountries, getRegion } from "./api.js";
-import { getPage, setPagination } from "./pagination.js";
-import countryPreview from "./preview.js";
+import search from "./Utils/search.js";
+
 import { selectIsValidValue, searchIsValidValue } from "./Utils/validation.js";
 
 const searchName = document.getElementById("search");
@@ -23,60 +22,33 @@ let waitToGetValue = 0;
 
 // searchInput.addEventListener("keypress", suggestCountries);
 
-export const renderCountries = (countries) => {
-  const countriesList = document.getElementById("countries");
-  countriesList.innerHTML = "Loading...";
-
-  countriesList.innerHTML = "";
-  countries.forEach((item) => {
-    countriesList.appendChild(countryPreview(item));
-  });
-};
-
-export const search = async (element, value, page = 1) => {
-  const fields = ["flag","name", "region", "capital", "population"];
-  const searchWith = {
-    FORM: () =>
-      getCountries(
-        {
-          name: value,
-          path: "/name",
-          fields,
-        }, page),
-
-    SELECT: () =>
-      getRegion(
-        {
-          name: value,
-          fields,
-        }, page),
+const beforeSearch = (elementName) => {
+  const path = {
+    NAME: "/name",
+    REGION: "/region",
   };
 
-  await searchWith[element]();
-  const countries = getPage(page);
-  renderCountries(countries);
-  
-  setPagination("element", element);
-  setPagination("page", 1);
-};
+  const searchWith = {
+    "FORM": async function (e) {
+      e.preventDefault();
+      searchInput.classList.remove("error");
 
+      const { value } = searchInput;
+      if (searchIsValidValue(value)) return await search(path.NAME, value);
+    },
+    "SELECT": async function ()  {
+      const { value } = searchSelectRegion;
+      if (selectIsValidValue(value)) return await search(path.REGION, value);
+    },
+  };
 
-searchSelectRegion.addEventListener("change", async () => {
-  const { value } = searchSelectRegion;
-  const element = "SELECT";
-  if (selectIsValidValue(value)) await search(element, value);
-});
+  return searchWith[elementName];
+}
 
-
-
-searchName.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const { value } = searchInput;
-  const element = "FORM";
-  if (searchIsValidValue(value)) await search(element, value);
-});
+searchSelectRegion.addEventListener("change", beforeSearch("SELECT"));
+searchName.addEventListener("submit", beforeSearch("FORM"));
 
 searchInput.addEventListener("blur", ({ target }) => {
   target.placeholder = "Digite o nome de um país";
   target.classList.remove("error");
-})
+});
