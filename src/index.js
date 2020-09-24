@@ -1,52 +1,35 @@
-import search from "./Utils/search.js";
+import { searchByName, searchBySelect } from "./Utils/search.js";
+import { getPage, setPagination } from "./pagination.js";
 
-import { selectIsValidValue, searchIsValidValue } from "./Utils/validation.js";
+import renderCountries from "./preview.js";
+
+const FIRST_PAGE = 1;
 
 const searchName = document.getElementById("search");
 const searchInput = document.getElementById("country");
-const searchSelectRegion = document.querySelector(".search__select__region");
+const searchRegion = document.querySelector(".search__select__region");
 
-let waitToGetValue = 0;
+const selectAction = async ({ target }) => {
+  await searchBySelect(target.value);
+  const countries = getPage(FIRST_PAGE);
+  setPagination("page", FIRST_PAGE);
 
-// const suggestCountries = ({ target }) => {
-//   if (waitToGetValue) clearTimeout(waitToGetValue);
+  renderCountries(countries);
+};
 
-//   waitToGetValue = setTimeout(searchForNames, 1000);
+const formAction = async (event) => {
+  event.preventDefault();
+  searchInput.classList.remove("error");
 
-//   async function searchForNames() {
-//     waitToGetValue = 0;
-//     const countries = await getCountriesNames(target.value);
-//     setDataList(countries);
-//   }
-// };
+  await searchByName(searchInput.value);
+  const countries = getPage(FIRST_PAGE);
+  setPagination("page", FIRST_PAGE);
 
-// searchInput.addEventListener("keypress", suggestCountries);
+  renderCountries(countries);
+};
 
-const beforeSearch = (elementName) => {
-  const path = {
-    NAME: "/name",
-    REGION: "/region",
-  };
-
-  const searchWith = {
-    "FORM": async function (e) {
-      e.preventDefault();
-      searchInput.classList.remove("error");
-
-      const { value } = searchInput;
-      if (searchIsValidValue(value)) return await search(path.NAME, value);
-    },
-    "SELECT": async function ()  {
-      const { value } = searchSelectRegion;
-      if (selectIsValidValue(value)) return await search(path.REGION, value);
-    },
-  };
-
-  return searchWith[elementName];
-}
-
-searchSelectRegion.addEventListener("change", beforeSearch("SELECT"));
-searchName.addEventListener("submit", beforeSearch("FORM"));
+searchRegion.addEventListener("change", selectAction);
+searchName.addEventListener("submit", formAction);
 
 searchInput.addEventListener("blur", ({ target }) => {
   target.placeholder = "Digite o nome de um país";

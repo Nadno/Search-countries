@@ -1,0 +1,59 @@
+.mode {
+  width: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__dark__mode {
+  width: 80px;
+  height: 24px;
+  background: var(--background-color);
+  margin: 0.4rem auto;
+  position: relative;
+  border-radius: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    content: 'OFF';
+    color: var(--text-color);
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  &:before {
+    content: 'ON';
+    color: var(--text-color);
+    position: absolute;
+    left: 10px;
+    z-index: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+  }
+  label {
+    @extend .box-shadow;
+    display: block;
+    width: 34px;
+    height: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: var(--color-elements);
+    border-radius: 1rem;
+    transition: all 0.4s ease;
+  }
+  input[type=checkbox] {
+    visibility: hidden;
+    &:checked + label {
+      left: 43px;
+    }
+  }    
+}

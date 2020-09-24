@@ -1,20 +1,19 @@
 import { getCountries } from "./api.js";
-import { getPage, setPagination } from "../pagination.js";
+import { searchIsValidValue, selectIsValidValue } from "./validation.js";
 
-import renderCountries from "../preview.js";
-
-const search = async (path, value) => {
-  const FIRST_PAGE = 1;
-  
+const search = async (path, value) =>
   await getCountries({
     name: value,
     path,
     fields: ["flag", "name", "region", "capital", "population"],
   });
 
-  const countries = getPage(FIRST_PAGE);
-  renderCountries(countries);
-  setPagination("page", 1);
+export const searchByName = async (value) => {
+  if (searchIsValidValue(value))
+    await search("/name", value);
 };
 
-export default search;
+export const searchBySelect = async (value) => {
+  if (selectIsValidValue(value))
+    await search("/region", value);
+};

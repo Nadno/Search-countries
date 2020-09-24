@@ -43,11 +43,12 @@ const setDetailElement = (element, value) =>
 const clearDetailElement = (element) =>
   (document.querySelector(element).innerHTML = "");
 
-const renderDetailElement = (detail) => {
-  if (["flag", "borders"].includes(detail)) return;
+const detailExceptions = ["flag", "borders"];
+const renderDetailElement = (detail, country) => {
+  if (detailExceptions.includes(detail)) return;
   const element = `#detail-${transformKey(detail)}`;
   clearDetailElement(element);
-  setDetailElement(element, country[detail]);
+  setDetailElement(element, country);
 };
 
 const setDetail = (country) => {
@@ -57,7 +58,7 @@ const setDetail = (country) => {
     detail.innerHTML = "Erro ao renderizar a página";
     return;
   }
-  const { flag, name, borders, currencies, languages } = country;
+  const { flag, name, borders, currencies, languages, population } = country;
   const flagEl = document.querySelector("#detail-flag");
   const borderCountriesEl = document.querySelector("#detail-borders");
 
@@ -65,11 +66,13 @@ const setDetail = (country) => {
   flagEl.alt = `${name}, flag`;
 
   Object.assign(country, {
-    population: country.population.toLocaleString("basic"),
+    population: population.toLocaleString("basic"),
     currencies: joinName(currencies),
     languages: joinName(languages),
   });
-  Object.keys(country).map(renderDetailElement);
+  
+  Object.keys(country)
+    .map((detail) => renderDetailElement(detail, country[detail]));
 
   borderCountriesEl.innerHTML = "";
   if (borders.length) {

@@ -25,7 +25,7 @@ document
   .querySelector("#color-mode")
   .addEventListener("change", ({ target }) => {
     const { dark, initial } = config.mode;
-    config.mode.selected = target.checked ? 1 : 0;
+    config.mode.selected = target.checked;
     target.checked ? changeColorMode(dark, target.checked) : changeColorMode(initial, target.checked);
     setItem("config", config);
   });

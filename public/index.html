@@ -10,19 +10,23 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700&display=swap"
       rel="stylesheet"
     />
-    <title>Countries Search, procure por países</title>
+    <title>Busque por países</title>
   </head>
   <body>
     <header id="header" class="box-shadow">
-      <strong>Aonde no mundo?</strong>
-      <div class="header__dark__mode">
-        <label for="color-mode">Mode escuro</label>
-        <input type="checkbox" id="color-mode" />
-      </div>
+      <strong>Onde no mundo?</strong>
+
+      <section class="mode">
+        Modo escuro:
+        <div class="header__dark__mode">  
+          <input type="checkbox" value="None" id="color-mode" name="check" />
+          <label for="color-mode"></label>
+        </div>
+      </section>
     </header>
 
     <section id="detail__container">
-      <button type="button" id="back-detail">back</button>
+      <button type="button" id="back-detail">Fechar</button>
       <article id="detail">
         <div class="flag__container">
           <img src="" alt="country flag" id="detail-flag" />
@@ -101,7 +105,7 @@
         id="region"
         name="region"
       >
-        <option label="Filter by" selected></option>
+        <option label="Região" selected></option>
         <option value="Africa">Africa</option>
         <option value="Americas">America</option>
         <option value="Asia">Asia</option>
@@ -115,11 +119,13 @@
       <div id="page">
         <a href="#search">
           <button id="back__page" class="box-shadow button" disabled="true">
-            back
+            voltar
           </button>
         </a>
         <a href="#search">
-          <button id="next__page" class="box-shadow button">next</button>
+          <button id="next__page" class="box-shadow button">
+            próximo
+          </button>
         </a>
       </div>
     </section>

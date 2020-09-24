@@ -2,9 +2,7 @@
   position: fixed;
   width: 100vw;
   height: 8rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
   padding: 1.4rem 4rem;
   font-size: 1.8rem;
   background-color: var(--color-elements);
@@ -161,6 +159,12 @@
 }
 
 @media (min-width: 600px) {
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   #search__section {
     display: flex;
     justify-content: space-between;

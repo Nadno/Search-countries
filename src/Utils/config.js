@@ -3,10 +3,10 @@ import { getStyle, changeColorMode } from "./style.js";
 
 const html = document.querySelector("html");
 const config = {
-  itemsForPage: 6,
+  itemsForPage: 8,
   fontSize: Number(getStyle(html, "--font-size").replace("%", "")),
   mode: {
-    selected: 0,
+    selected: false,
     initial: {
       textColor: getStyle(html, "--text-color"),
       inputText: getStyle(html, "--input-text-color"),
