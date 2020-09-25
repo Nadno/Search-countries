@@ -3,7 +3,7 @@
 <br/>
 
 <h1 align="center">Design fornecido</h1>
-<h1 align="center"><img src="original-design.png"></h1>
+<h1 align="center"><img src="original-design.jpg"></h1>
 <br/>
 
 <h1 align="center">Design feito</h1>
