@@ -17,7 +17,7 @@
 
 <h1 align="center">Detalhes</h1>
 <p align="center">A página detalhes, mostra mais detalhes sobre os países, mostrando coisas como a moeda, idioma e países próximo ao país selecionado.</p>
-<h1 align="center"><img src="detail-desktop.jpg"></h1>
+<h1 align="center"><img src="detail-desktop.png"></h1>
 <br/>
 
 ##Outras informações:
