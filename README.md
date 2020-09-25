@@ -20,7 +20,7 @@
 <h1 align="center"><img src="detail-desktop.png"></h1>
 <br/>
 
-##Outras informações:
+<h2>Outras informações:</h2>
 - Cada input (text e select), passa por uma simples validação, que impede valores nulos ou inválidos.
 - As páginas são limitadas por cinco países por vez, para não poluir a tela quando feita uma pesquisa com muitos resultados.
 - Além de integrar com uma API REST, a página foi estilizando com Sass, para fins de aprendizado.
