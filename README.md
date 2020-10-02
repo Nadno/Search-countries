@@ -1,4 +1,4 @@
-<h1 align="center">Countries APi</h1>
+<h1 align="center">Countries API</h1>
 <p align="center">Uma página de busca web feita a partir de um desafio do site Frontend Mentor, onde foi dado do design e informações sobre as funcionalidades. A página recebe dados de uma API REST, chamada <em>restcountries.eu</em>, e com parte dos dados fornecidos, é feito a renderização de uma prévia dos países com o nome mais semelhante ao pesquisado, ou dos países de uma determinada região.</p>
 <br/>
 
