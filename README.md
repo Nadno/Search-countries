@@ -1,5 +1,5 @@
 <h1 align="center">Countries API</h1>
-<p>Uma página de busca web feita a partir de um desafio do site Frontend Mentor, onde foi dado do design e informações sobre as funcionalidades. A página recebe dados de uma API REST, chamada <em>restcountries.eu</em>, e com parte dos dados fornecidos, é mostrado prévia dos países com o nome mais semelhante ao pesquisado, ou dos países de uma determinada região, e quando selecionado um paíse, é aberta a tela detalhes. Também foi utilizado o conceito Mobile First, durante a construção das páginas.</p>
+<p>Uma página de busca web feita a partir de um desafio do site Frontend Mentor, onde foi dado informações sobre as funcionalidades a serem desenvolvidas. A página recebe dados de uma API REST, chamada <em>restcountries.eu</em>, e com parte dos dados fornecidos, é mostrado prévia dos países com o nome mais semelhante ao pesquisado, ou dos países de uma determinada região, e quando selecionado um paíse, é aberta a tela detalhes. Também foi utilizado o conceito Mobile First, durante a construção das páginas.</p>
 <br/>
 
 Outras informações:
@@ -10,10 +10,12 @@ Outras informações:
 <br/>
 
 <h1 align="center">Design fornecido</h1>
+<p align="center">Deisgn fornecido pelo site Frontend Mentor.</p>
 <h1 align="center"><img src="original-design.jpg"></h1>
 <br/>
 
 <h1 align="center">Design feito</h1>
+<p align="center">O design final, tentando chegar o mais próximo ao design fornecido.</p>
 <h1 align="center"><img src="light-desktop.png"></h1>
 <br/>
 
