@@ -10,7 +10,7 @@ Outras informações:
 <br/>
 
 <h1 align="center">Design fornecido</h1>
-<p align="center">Deisgn fornecido pelo site Frontend Mentor.</p>
+<p align="center">Design fornecido pelo site Frontend Mentor.</p>
 <h1 align="center"><img src="original-design.jpg"></h1>
 <br/>
 
