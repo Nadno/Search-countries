@@ -20,7 +20,7 @@ Outras informações:
 <br/>
 
 <h1 align="center">Detalhes</h1>
-<p align="center">A página Detalhes, exibe mais informações como a moeda, idioma e países próximo ao país selecionado.</p>
+<p align="center">A página Detalhes, exibe mais informações como a moeda, idioma e países próximos ao país selecionado.</p>
 <h1 align="center"><img src="detail-desktop.png"></h1>
 <br/>
 
