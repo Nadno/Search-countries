@@ -20,22 +20,22 @@ const preview = ({ flag, name, region, capital, population }) => {
   `;
   const PREVIEW_DESCRIPTION = `
     <div class="country__content">
-      <div class="country__name">
+      <p class="country__name">
         <strong>${name}</strong>
-      </div>
+      </p>
       <div class="country__detail">
-        <div>
+        <p>
           <strong>População:</strong>
           ${population.toLocaleString("basic")}
-        </div>
-        <div>
+        </p>
+        <p>
           <strong>Region:</strong>
           ${region}
-        </div>
-        <div>
+        </p>
+        <p>
           <strong>Capital:</strong>
           ${capital}
-        </div>
+        </p>
       </div>
     </div>
   `;
