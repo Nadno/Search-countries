@@ -15,7 +15,7 @@ const preview = ({ flag, name, region, capital, population }) => {
     <img
       class="preview__flag"
       src="${flag}"
-      alt="${name}, Bandeira" 
+      alt="${name}, Bandeira"
     >
   `;
   const PREVIEW_DESCRIPTION = `

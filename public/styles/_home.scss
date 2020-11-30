@@ -16,6 +16,7 @@
   padding: 0 2rem;
 
   .search__country__form {
+    @extend .border-radius;
     display: flex;
     align-items: center;
     margin-bottom: 4rem;
@@ -26,9 +27,10 @@
     @extend .input-focus;
     height: 3.4rem;
     border: none;
+    
     padding: 0.6rem 1.4rem;
     margin-right: 0.4rem;
-    background-color: var(--color-elements);
+    background-color: transparent;
     cursor: pointer;
     
     .submit__icon {
@@ -43,11 +45,15 @@
     .search__input {
       @extend .input-focus;
       width: 100%;
-      height: 4rem;
+      height: 5rem;
       border: none;
       padding: 0 1rem;
       color: var(--input-text);
-      background-color: var(--color-elements);
+      background-color: transparent;
+    }
+
+    .search__input::placeholder {
+      color: var(--input-text);
     }
 
     .error {
@@ -68,8 +74,8 @@
   }
 
   .search__select__region {
-    @extend .input-focus;
-    height: 4rem;
+    @extend .input-focus, .border-radius;
+    height: 5rem;
     width: 60%;
     border: none;
     padding: 0 1.6rem;
@@ -86,50 +92,14 @@
 
   #countries {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 270px));
+    grid-template-columns: repeat(auto-fit, 24rem);
     justify-content: center;
     gap: 2.4rem;
 
     list-style: none;
   }
 
-  .preview {
-    width: 100%;
-    background-color: var(--color-elements);
-  }
-
-  .preview__content {
-    @extend .box-shadow, .border-radius;
-    height: 100%;
-
-    .flag__container {
-      @extend .border-radius;
-      height: 18rem;
-    }
-
-    .preview__flag {
-      height: 100%;
-      width: 100%;
-      border-radius: 0.8rem 0.8rem 0 0;
-    }
-  }
-
-  .preview__button {
-    cursor: pointer;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    border: none;
-    background-color: transparent;
-
-    &:focus-within .country__content {
-      border: 2px var(--text-color) solid;
-      border-radius: 1rem;
-    }
-  }
+  
 
   #page {
     display: none;
@@ -172,6 +142,7 @@
     .search__country__form {
       width: 40vw;
     }
+
     .search__select__region {
       width: 18vw;
     }

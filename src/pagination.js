@@ -22,7 +22,6 @@ export const setPagination = (name, value) => {
 export const getPage = (page) => {
   const from = page * config.itemsForPage - config.itemsForPage;
   const to = page * config.itemsForPage;
-  console.log(config.itemsForPage);
   return page
     ? pagination.data.slice(from, to)
     : pagination.countries;
