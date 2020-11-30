@@ -27,8 +27,8 @@ export const getCountries = async ({ path, name, fields }) => {
     const pages = countries.length / config.itemsForPage;
 
     if (countries?.status) return setError(SEARCH_INPUT, "noResults")
-    setPagination("data", countries);
-    setPagination("maxPages", pages);
+    
+    setPagination({ countries, pages });
     activePagination(true);
   } catch (err) {
     throw new Error("Erro ao buscar países:", err);

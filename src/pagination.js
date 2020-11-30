@@ -7,23 +7,28 @@ const BACK = "back__page";
 const pagination = {
   page: 1,
   maxPages: 0,
-  data: [],
+  countries: [],
 };
 
 const disableButton = (button, toggle) =>
   (document.getElementById(button).disabled = toggle);
 
-export const setPagination = (name, value) => {
+export const setPagination = ({ countries, pages }, FIRST_PAGE = 1) => {
   Object.assign(pagination, {
-    [name]: value,
+    page: FIRST_PAGE,
+    maxPages: pages,
+    countries,
   });
+  disableButton(BACK, true);
 };
 
+export const setPageTo = (value) => pagination.page = value;
+
 export const getPage = (page) => {
-  const from = page * config.itemsForPage - config.itemsForPage;
+  const from = (page * config.itemsForPage) - config.itemsForPage;
   const to = page * config.itemsForPage;
   return page
-    ? pagination.data.slice(from, to)
+    ? pagination.countries.slice(from, to)
     : pagination.countries;
 };
 
@@ -36,19 +41,19 @@ const nextPage = () => {
 
   const countries = getPage(next);
   renderCountries(countries);
-  setPagination("page", next);
+  setPageTo(next);
 };
 
 const backPage = () => {
   const { page, maxPages } = pagination;
 
   const back = page - 1;
-  if (back === 1) disableButton("back__page", true);
-  if (back < maxPages) disableButton("next__page", false);
+  if (back === 1) disableButton(BACK, true);
+  if (back < maxPages) disableButton(NEXT, false);
 
   const countries = getPage(back);
   renderCountries(countries);
-  setPagination("page", back);
+  setPageTo(back);
 };
 
 const nextEl = document.getElementById(NEXT);

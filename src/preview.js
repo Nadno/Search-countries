@@ -59,7 +59,8 @@ const preview = ({ flag, name, region, capital, population }) => {
 
 const renderCountries = (countries) => {
   const countriesList = document.getElementById("countries");
-
+  if (!countriesList) return;
+  
   countriesList.innerHTML = "";
   countries.forEach((country) =>
     countriesList.appendChild(preview(country))

@@ -1,5 +1,5 @@
 import { searchByName, searchBySelect } from "./Utils/search.js";
-import { getPage, setPagination } from "./pagination.js";
+import { getPage } from "./pagination.js";
 
 import renderCountries from "./preview.js";
 
@@ -12,7 +12,6 @@ const searchRegion = document.querySelector(".search__select__region");
 const selectAction = async ({ target }) => {
   await searchBySelect(target.value);
   const countries = getPage(FIRST_PAGE);
-  setPagination("page", FIRST_PAGE);
 
   renderCountries(countries);
 };
@@ -23,7 +22,6 @@ const formAction = async (event) => {
 
   await searchByName(searchInput.value);
   const countries = getPage(FIRST_PAGE);
-  setPagination("page", FIRST_PAGE);
 
   renderCountries(countries);
 };
