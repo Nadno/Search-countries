@@ -17,17 +17,15 @@ const getBorders = async (code) => {
   const fields = ["name"];
   const { name } = await getCountry(path, { name: code, fields });
   const button = document.createElement("button");
-  const link = document.createElement("a");
 
-  link.href = "#detail";
+ 
   button.type = "button";
   button.innerText = name;
   button.className = "border__country";
 
   button.addEventListener("click", () => renderDetail(name));
-  link.appendChild(button);
 
-  return link;
+  return button;
 };
 
 const joinName = (item) =>

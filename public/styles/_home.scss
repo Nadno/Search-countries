@@ -1,11 +1,11 @@
 #header {
+  @extend .element-color;
   position: fixed;
   width: 100vw;
   height: 8rem;
 
   padding: 1.4rem 4rem;
   font-size: 1.8rem;
-  background-color: var(--color-elements);
   margin-bottom: 4rem;
 
   z-index: 10;
@@ -16,16 +16,15 @@
   padding: 0 2rem;
 
   .search__country__form {
-    @extend .border-radius;
+    @extend .border-radius, .element-color;
     display: flex;
     align-items: center;
     margin-bottom: 4rem;
-    background-color: var(--color-elements);
   }
 
   .search__submit {
     @extend .input-focus;
-    height: 3.4rem;
+    height: 100%;
     border: none;
     
     padding: 0.6rem 1.4rem;
@@ -35,6 +34,7 @@
     
     .submit__icon {
       height: 100%;
+      max-height: 2.6rem;
     }
   }
 
@@ -74,13 +74,12 @@
   }
 
   .search__select__region {
-    @extend .input-focus, .border-radius;
+    @extend .input-focus, .border-radius, .element-color;
     height: 5rem;
     width: 60%;
     border: none;
     padding: 0 1.6rem;
     color: var(--input-text);
-    background-color: var(--color-elements);
     cursor: pointer;
   }
 }

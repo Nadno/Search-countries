@@ -1,7 +1,7 @@
 .preview {
-  @extend .box-shadow, .border-radius;
+  @extend .box-shadow, .border-radius, .element-color;
   height: 100%;
-  background-color: var(--color-elements);
+  
 
   .preview__content {
   
@@ -40,6 +40,7 @@
   }
   
   .preview__button {
+    @extend .input-focus;
     cursor: pointer;
     width: 100%;
   
@@ -49,10 +50,10 @@
   
     border: none;
     background-color: transparent;
-  
-    &:focus-within .country__content {
-      border: 2px var(--text-color) solid;
-      border-radius: 1rem;
-    }
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    transition: transform linear 0.2s;
   }
 }
