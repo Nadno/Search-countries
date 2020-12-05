@@ -1,6 +1,5 @@
 <h1 align="center">Search Countries</h1>
 </br>
-<p align="center">Design fornecido pelo site Frontend Mentor.</p>
 <h3 align="center"><img src="/assets/readme/mobile.jpg"></h3>
 </br>
 <h2>Sobre</h2>
