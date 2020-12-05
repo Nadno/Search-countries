@@ -39,7 +39,7 @@ body {
 }
 
 .input-focus {
-  &:focus {
+  &:focus-within {
     border: 2px var(--text-color) solid;
   }
 }

@@ -13,7 +13,8 @@
 }
 
 #search__section {
-  padding: 0 2rem;
+  width: 90vw;
+  margin: 0 auto;
 
   .search__country__form {
     @extend .border-radius, .element-color;
@@ -85,16 +86,15 @@
 }
 
 #result {
-  width: 100vw;
-  padding: 0 2.4rem;
-  padding-top: 6rem;
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 4rem;
 
   #countries {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 24rem);
+    grid-gap: 4rem;
+    grid-template-columns: repeat(auto-fit, 26rem);
     justify-content: center;
-    gap: 2.4rem;
-
     list-style: none;
   }
 
@@ -102,16 +102,22 @@
 
   #page {
     display: none;
-    margin: 2rem;
+    margin: 2rem 0;
   }
 
   #page.on {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  #page__number {
+    font-size: 1.6rem;
   }
 
   #back__page,
   #next__page {
+    @extend .input-focus;
     width: 8rem;
     height: 4rem;
     border: none;
@@ -145,9 +151,5 @@
     .search__select__region {
       width: 18vw;
     }
-  }
-
-  #countries {
-    flex-direction: row;
   }
 }

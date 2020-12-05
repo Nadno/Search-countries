@@ -13,23 +13,24 @@ const pagination = {
 const disableButton = (button, toggle) =>
   (document.getElementById(button).disabled = toggle);
 
+const setPageTo = (value) => {
+  pagination.page = value;
+  document.getElementById("page__number").innerHTML = value;
+};
+
 export const setPagination = ({ countries, pages }, FIRST_PAGE = 1) => {
   Object.assign(pagination, {
-    page: FIRST_PAGE,
     maxPages: pages,
     countries,
   });
+  setPageTo(FIRST_PAGE);
   disableButton(BACK, true);
 };
 
-export const setPageTo = (value) => pagination.page = value;
-
 export const getPage = (page) => {
-  const from = (page * config.itemsForPage) - config.itemsForPage;
+  const from = page * config.itemsForPage - config.itemsForPage;
   const to = page * config.itemsForPage;
-  return page
-    ? pagination.countries.slice(from, to)
-    : pagination.countries;
+  return page ? pagination.countries.slice(from, to) : pagination.countries;
 };
 
 const nextPage = () => {

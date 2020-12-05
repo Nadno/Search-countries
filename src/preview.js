@@ -40,16 +40,17 @@ const preview = ({ flag, name, region, capital, population }) => {
     </div>
   `;
 
+  li.title = name;
   li.className = "preview border-radius";
   flagDiv.className = "flag__container";
   flagDiv.insertAdjacentHTML("beforeend", PREVIEW_FLAG);
-  button.appendChild(flagDiv);
   
-  button.insertAdjacentHTML("beforeend", PREVIEW_DESCRIPTION);
-  article.className = "preview__content";
-
   Object.assign(button, PREVIEW_BUTTON);
   button.addEventListener("click", () => detail(name));
+  button.insertAdjacentHTML("beforeend", PREVIEW_DESCRIPTION);
+
+  article.className = "preview__content";
+  article.appendChild(flagDiv);
   article.appendChild(button);
 
   li.appendChild(article);
