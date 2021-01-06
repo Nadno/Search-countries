@@ -1,10 +1,9 @@
 <h1 align="center">Search Countries</h1>
 </br>
-<p align="center">Design fornecido pelo site Frontend Mentor.</p>
 <h3 align="center"><img src="/assets/readme/mobile.jpg"></h3>
 </br>
 <h2>Sobre</h2>
-<p>A aplicação foi feita a partir de um desafio do site Frontend Mentor. O desafio consiste em integrar um front-end com uma API pública chamada <a href="https://restcountries.eu/"><em>REST Countries</em></a>, com um design previamente fornecido. A página tem duas principais funções, a primeira que é procurar por países, e a segunda que é fornecer um tela com detalhes sobre um país selecionado.</p>
+<p>A aplicação foi feita a partir de um desafio do site <a href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca"><em>Frontend Mentor</em></a>. O desafio consiste em integrar um front-end com uma API pública chamada <a href="https://restcountries.eu/"><em>REST Countries</em></a>, com um design previamente fornecido. A página tem duas principais funções, a primeira que é procurar por países, e a segunda que é fornecer um tela com detalhes sobre um país selecionado.</p>
 </br>
 
 <h2>A home da página:</h2>
