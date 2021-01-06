@@ -1,4 +1,6 @@
 import config from "./config.js";
+import myFetch from "./myFetch.js";
+
 import { activePagination, setPagination } from "../pagination.js";
 import { setError } from "./validation.js";
 
@@ -9,7 +11,7 @@ const parseJson = (res) => res.json();
 
 export const getCountry = async (path, { name, fields }) => {
   try {
-    const country = await fetch(
+    const country = await myFetch(
       `${BASE_URL}${path}/${name}?fullText=true${fields ? "?&fields=" + fields.join(";") : ""}`
     ).then(parseJson);
 
@@ -21,7 +23,7 @@ export const getCountry = async (path, { name, fields }) => {
 
 export const getCountries = async ({ path, name, fields }) => {
   try {
-    const countries = await fetch(
+    const countries = await myFetch(
       `${BASE_URL}${path}/${name}${fields ? "?fields=" + fields.join(";") : ""}`
     ).then(parseJson);
     const pages = countries.length / config.itemsForPage;
@@ -31,6 +33,6 @@ export const getCountries = async ({ path, name, fields }) => {
     setPagination({ countries, pages });
     activePagination(true);
   } catch (err) {
-    throw new Error("Erro ao buscar países:", err);
+    throw new Error(err);
   }
 };
