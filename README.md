@@ -23,3 +23,4 @@ Outras funcionalidades:
 - Cada input (text e select), passa por uma simples validação, que impede valores nulos ou inválidos, e também notifica sobre os erros cometidos.
 - Possui paginação, assim é mostrado apenas uma pequena parte do que foi pesquisado, evitando poluir a tela.
 - A página guarda localmente dados de configurações, como o modo escuro ou o tanto de resultados por página.
+- E por último, caso o navegador não possua compatibilidade com a Fetch API, é utilizado outra fetch, menos robusta, feita com AJAX.
