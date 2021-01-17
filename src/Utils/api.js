@@ -11,7 +11,8 @@ const parseJson = (res) => res.json();
 
 export const getCountry = async (path, { name, fields }) => {
   try {
-    const country = await myFetch(
+    const fetchAPI = window.fetch ? window.fetch : myFetch;
+    const country = await fetchAPI(
       `${BASE_URL}${path}/${name}?fullText=true${fields ? "?&fields=" + fields.join(";") : ""}`
     ).then(parseJson);
 
@@ -23,7 +24,9 @@ export const getCountry = async (path, { name, fields }) => {
 
 export const getCountries = async ({ path, name, fields }) => {
   try {
-    const countries = await myFetch(
+    const fetchAPI = window.fetch ? window.fetch : myFetch;
+    
+    const countries = await fetchAPI(
       `${BASE_URL}${path}/${name}${fields ? "?fields=" + fields.join(";") : ""}`
     ).then(parseJson);
     const pages = countries.length / config.itemsForPage;
